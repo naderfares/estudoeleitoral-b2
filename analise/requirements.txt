@@ -1,0 +1,9 @@
+# Versões usadas nas análises de 01 a 03/11/2026 (Python 3.13.18)
+pandas==3.0.5
+numpy==2.5.3
+cvxpy==1.9.3
+clarabel==0.11.1
+openpyxl==3.1.5
+matplotlib==3.11.2
+# só para o modelo bayesiano R×C das análises complementares
+pymc==6.4.0

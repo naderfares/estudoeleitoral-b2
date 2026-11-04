@@ -1,0 +1,69 @@
+name: B2 - modelo bayesiano RxC
+
+# Corrida da análise complementar B2 em pedaços: cada UF e cada tabela numa máquina (54 tarefas).
+# Depois, uma tarefa junta os pedaços nos mesmos arquivos que ei_bayes.py gravaria, roda b2_rodar.py
+# sobre os sorteios prontos e grava o resultado no ramo "resultados-b2".
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tabela:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        uf: [MG, SP, RS, BA, PR, SC, GO, PB, PI, MA, PE, CE, RJ, RN, PA, MT, TO, AL, MS, ES, SE, AM, RO, AC, DF, AP, RR]
+        tabela: [fluxo, deputado_blocos]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Dependências
+        run: pip install pymc==6.4.0 pytensor==3.3.7 arviz==1.3.0 numpy==2.5.3 pandas==3.0.5 scipy==1.18.1
+      - name: Inferência (${{ matrix.uf }}, ${{ matrix.tabela }})
+        working-directory: analise
+        run: |
+          nproc
+          python3 -I scripts/b2_tabela.py munzona ../pedacos ${{ matrix.uf }} ${{ matrix.tabela }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pedaco-${{ matrix.uf }}-${{ matrix.tabela }}
+          path: pedacos/
+          retention-days: 30
+
+  juntar:
+    needs: tabela
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Dependências
+        run: pip install -r analise/requirements.txt pytensor==3.3.7 arviz==1.3.0 scipy==1.18.1
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: pedaco-*
+          path: pedacos
+          merge-multiple: true
+      - name: Juntar os pedaços
+        working-directory: analise
+        run: python3 -I scripts/b2_juntar.py munzona ../pedacos results2_n0_bayes results2_n0_20
+      - name: Motor v4 sobre os sorteios
+        working-directory: analise
+        run: python3 -I scripts/b2_rodar.py --sem-inferencia
+      - name: Gravar no ramo resultados-b2
+        run: |
+          git config user.name "b2-actions"
+          git config user.email "b2-actions@users.noreply.github.com"
+          git checkout -b resultados-b2
+          git add -f analise/results_b2 analise/results2_n0_bayes/diagnostico_bayes.csv analise/results2_n0_bayes/limites_duncan_davis.csv
+          git commit -m "Resultados da análise B2 (run ${{ github.run_id }})"
+          git push -f origin resultados-b2

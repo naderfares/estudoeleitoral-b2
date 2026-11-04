@@ -1,0 +1,61 @@
+               real    A  A_liq    B  modelo_antigo_restrito
+partido                                                     
+PL              121  118    119  117                     111
+PT               70   72     73   72                      73
+UNIÃO            46   46     45   45                      45
+PSD              43   44     43   45                      45
+PP               41   41     41   41                      41
+REPUBLICANOS     41   41     41   41                      41
+MDB              36   37     37   37                      38
+PODE             27   27     28   27                      27
+PSB              15   15     15   16                      19
+PSOL             14   14     14   14                      14
+PCDOB            11   10      9   10                      11
+PSDB             11   11     11   11                      11
+NOVO             10   10     10   10                      10
+PV                7    7      7    7                       7
+PDT               6    6      6    6                       6
+AVANTE            5    5      5    5                       5
+PRD               5    5      5    5                       5
+SOLIDARIEDADE     2    2      2    2                       2
+MISSÃO            1    1      1    1                       1
+REDE              1    1      1    1                       1
+
+Coligação Lula: {'real': 124, 'A': 125, 'A_liq': 125, 'B': 126, 'modelo_antigo_restrito': 131}
+Mudanças por UF (A):
+uf      agremiacao  votos_real  votos_sim  vagas_real  vagas_sim
+AM              PL      386882     378631           2          1
+AM             PSD      377854     384989           1          2
+MA             MDB      908099     948675           5          6
+MA PCDOB / PT / PV      303233     313680           2          1
+RJ             MDB      315595     333127           1          2
+RJ              PL     2380229    2437883          15         14
+RS             MDB      471749     471749           3          2
+RS PCDOB / PT / PV     1063436    1164627           6          7
+SP PCDOB / PT / PV     2843542    2954268          11         12
+SP              PL     6429497    6568902          19         18
+Mudanças por UF (B):
+uf      agremiacao  votos_real  votos_sim  vagas_real  vagas_sim
+AM              PL      386882     370400           2          1
+AM             PSD      377854     391067           1          2
+ES      PP / UNIÃO      460375     453800           3          2
+ES             PSB      294896     315350           1          2
+MA             MDB      908099     947770           5          6
+MA PCDOB / PT / PV      303233     315384           2          1
+MG              PL     4613114    4658459          21         20
+MG             PSD      532313     555543           2          3
+RJ             MDB      315595     332564           1          2
+RJ              PL     2380229    2458927          15         14
+RS             MDB      471749     471755           3          2
+RS PCDOB / PT / PV     1063436    1154851           6          7
+SP PCDOB / PT / PV     2843542    3009608          11         12
+SP              PL     6429497    6499442          19         18
+
+SENADO A:
+  RN: sai SAMANDA DE LULA (PT) -> entra ZENAIDE MAIA (PSD)
+
+SENADO A_liq:
+  PA: sai CHICÃO (UNIÃO) -> entra DELEGADO ÉDER MAURO (PL)
+
+SENADO B:
+  RN: sai SAMANDA DE LULA (PT) -> entra ZENAIDE MAIA (PSD)
